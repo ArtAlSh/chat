@@ -1,0 +1,51 @@
+{% extends 'base_chats_list.html' %}
+{% load static %}
+
+
+{% block message_section_content %}
+
+    {# Empty message list #}
+    {% if not messages_list %}
+        <p>You haven't message.</p>
+    {% endif %}
+
+    <div id="messages_list">
+    {# Message conteiner #}
+        {% for message in messages_list %}
+
+            {# message view #}
+            <div class="message_bord {% if message.from_user == user %}my_msg{% endif %}">
+
+                <div class="message_info">
+                    <div>{{ message.date|date:"M j, G:i" }}</div>
+
+                    {# delete and correct buttons #}
+                    {% if message.from_user == user %}
+                        <div class="buttons_event">
+                            <a href="{% url 'chats:update_message' user_id chat_id message.pk %}">
+                                <div class="cor_button">/</div>
+                            </a>
+                            <a href="{% url 'chats:delete_message' user_id chat_id message.pk %}">
+                                <div class="del_button">x</div>
+                            </a>
+                        </div>
+                    {% endif %}
+
+                </div>
+                <hr>
+
+                <p>{{ message.text }}</p>
+
+            </div>
+
+        {% endfor %}
+    </div>
+
+    {# message form #}
+    <form id="message_form" method="post" action="{{ message_form_url }}">
+        {% csrf_token %}
+        {{ message_form.text }}
+        <button class="form_button" type="submit" name="msg" value="True">Send</button>
+    </form>
+
+{% endblock message_section_content %}

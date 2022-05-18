@@ -1,0 +1,49 @@
+#messages_list {
+    height: 100%;
+    overflow-y: auto;
+    /*border: 1px dashed brown;*/
+    display: flex;
+    flex-direction: column;
+    scroll-padding: auto;
+}
+
+#message_form {
+    display: flex;
+    /*border: 1px dotted black;*/
+    justify-content: center;
+}
+
+textarea#id_text {
+    all: unset;
+    width: 50%;
+    max-width: 300px;
+    min-width: 100px;
+    margin: 5px;
+    padding: 10px;
+    border: 2px solid cornflowerblue;
+    border-radius: 10px 10px 0px 10px;
+    background-color: aliceblue;
+    resize: none;
+    overflow-y: hidden;
+    overflow-wrap: break-word;
+    overflow-wrap: anywhere;
+}
+
+#message_form .form_button {
+    height: 50px;
+    width: 50px;
+    border: none;
+    margin: 5px;
+    vertical-align: center;
+    color: azure;
+    font-style: italic;
+    font-weight: bolder;
+    background-color: cornflowerblue;
+    border-radius: 50%;
+}
+
+#message_form .form_button:hover {
+    border: 2px solid cornflowerblue;
+    color: cornflowerblue;
+    background-color: azure;
+}

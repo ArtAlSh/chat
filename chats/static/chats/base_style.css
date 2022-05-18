@@ -1,0 +1,30 @@
+:root {
+    --widget-width: 70%;
+    --widget-height: 600px;
+}
+
+#main_section {
+    display: flex;
+    margin: 0px auto;
+    width: var(--widget-width);
+    height: var(--widget-height);
+    border: 2px solid silver;
+}
+
+#contacts_section {
+    width: 30%;
+    /*border: 1px dashed magenta;*/
+    display: flex;
+    flex-direction: column;
+    background-color: snow;
+}
+
+#message_section {
+    width: 70%;
+    height: 100%;
+    border-left: 2px solid silver;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    background-color: ghostwhite;
+}

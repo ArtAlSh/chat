@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contacts_section_content %}
+
+    <section id="user_info_section">
+
+        <div class="user_info_card">
+            <img class="user_avatar"
+                 src="{% static "chats/img/default/no_avatar.png" %}"
+                 alt="{{ user.username }}"
+            />
+            <p class="users_contacts">{{ user.username }}</p>
+
+            <div class="dropdown">
+                <button class="dropbtn">act.</button>
+                <div class="dropdown-content">
+                    <a href="#">Home page</a>
+                    <a href="#">Change password</a>
+                    <hr>
+                    <a href="{% url 'accounts:logout' %}">LogOut</a>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <form id="find_form" method="post">
+        {% csrf_token %}
+        {{ find_form.find_field }}
+        <button type="submit" name="find_button" value="find">Find</button>
+    </form>
+
+    <section id="chats_list">
+
+        {% if find_flag and chats_list %}
+            <p>Your chats:</p><hr>{% endif %}
+
+        {% if not find_flag and not chats_list %}
+            <p>
+                You haven't chats.<br>
+                Use upper form to find and add new chat.
+            </p>
+        {% endif %}
+
+        {# __________own user's chats list_____________ #}
+        {% for chat in chats_list %}
+            {# User chat card #}
+            <a class="chat_view {% if chat.chat.id == chat_id %}active_chat{% endif %}"
+               href="{% url 'chats:message_view' user_id chat.chat.id %}"
+            >
+                <img class="user_avatar"
+                     src="{% static "chats/img/default/no_avatar.png" %}"
+                     alt="{{ user.user.username }}_avatar"
+                />
+                <p>{{ chat }}</p>
+                <form class="delete_chat"
+                      method="post"
+                      action="{% url 'chats:delete_chat' user_id chat.id %}"
+                >
+                    {% csrf_token %}
+                    <button type="submit">X</button>
+                </form>
+            </a>
+
+        {% endfor %}
+
+        {# _______New users list_________ #}
+        {% if find_flag %}
+
+            {% if not users_list %}
+                <p>Can't find any new user.</p>
+            {% endif %}
+
+            {% if users_list %}
+                <p>Add new chat:</p><hr>
+            {% endif %}
+
+            {% for user in users_list %}
+                {# New user chat card #}
+                <a class="chat_view" href="#">
+                    <img class="user_avatar"
+                         src="{% static "chats/img/default/no_avatar.png" %}"
+                         alt="{{ user.username }}_avatar"
+                    />
+                    <p>{{ user.username }}</p>
+                    <form class="add_chat" method="post" action="{% url 'chats:new_chat' user_id %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="to_user" value="{{ user.id }}">
+                        <button type="submit">Add</button>
+                    </form>
+                </a>
+
+            {% endfor %}
+        {% endif %}
+
+    </section>
+
+{% endblock contacts_section_content %}

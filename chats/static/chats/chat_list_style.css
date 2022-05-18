@@ -1,0 +1,124 @@
+/* find form */
+
+#find_form {
+    all: unset;
+    margin: 0px;
+    border: 2px solid cornflowerblue;
+    border-radius: 0px 0px 10px 10px;
+    display: flex;
+    flex-direction: row;
+    background-color: snow;
+}
+
+#find_form input[type=text] {
+    width: 100%;
+    border: none;
+    outline: none;
+    margin: 3px;
+    padding-left: 7px;
+    padding-right: 7px;
+    background-color: snow;
+    font-size: 20px;
+}
+
+#find_form button {
+    width: 60px;
+    height: 40px;
+    background-color: cornflowerblue;
+    outline: none;
+    border: none;
+    color: white;
+    font-size: large;
+    font-weight: bolder;
+    font-style: italic;
+}
+
+#find_form button:hover {
+    background-color: aliceblue;
+    color: cornflowerblue;
+    border-bottom-right-radius: 10px;
+    border-left: 2px solid cornflowerblue;
+}
+
+/* user list view */
+
+#chats_list {
+    display: inline-block;
+    overflow: auto;
+}
+
+#chats_list .chat_view {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    padding: 10px;
+    margin: 1px;
+    text-decoration: none;
+    border-bottom: 2px solid cornflowerblue;
+    border-radius: 10px;
+}
+
+#chats_list .active_chat {
+    background-color: cornflowerblue;
+    border: none;
+}
+
+#chats_list .active_chat p {
+    color: white;
+}
+
+#chats_list .chat_view:hover {
+    border: 2px solid cornflowerblue;
+    border-radius: 10px;
+}
+
+#chats_list p {
+    overflow-wrap: anywhere;
+    text-decoration: none;
+    font-size: large;
+    margin: auto 10px;
+    color: cornflowerblue;
+}
+
+/* delete user form */
+
+#chats_list form.delete_chat {
+    margin: 0px 0px auto auto
+}
+
+#chats_list .delete_chat button {
+    background-color: palevioletred;
+    outline: none;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-weight: bolder;
+}
+
+#chats_list .delete_chat button:hover {
+    background-color: darkred;
+}
+
+/* add user form */
+
+#chats_list form.add_chat {
+    margin-left: auto;
+    margin-right: 0px;
+}
+
+#chats_list .add_chat button {
+    background-color: cornflowerblue;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    outline: none;
+    border: none;
+    color: white;
+    font-weight: bold;
+}
+
+#chats_list .add_chat button:hover {
+    border: 2px solid cornflowerblue;
+    background-color: aliceblue;
+    color: cornflowerblue;
+}

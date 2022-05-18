@@ -1,0 +1,64 @@
+.message_bord {
+    border: none;
+    border-radius: 10px 10px 10px 0px;
+    margin: 5px 30% 10px 15px;
+    padding: 10px;
+    background-color: snow;
+            /*rgba(189, 164, 63, 0.14);*/
+    box-shadow: 5px -5px 5px rgba(0, 0, 0, 0.19);
+}
+
+.my_msg {
+    border-radius: 10px 10px 0px 10px;
+    margin: 5px 15px 10px 30%;
+    background-color: rgba(63, 189, 185, 0.14);
+}
+
+.message_info {
+    display: flex;
+}
+
+.message_bord a {
+    color: black;
+    text-decoration: none;
+}
+
+.buttons_event {
+    /*border: 1px solid black;*/
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    margin: -10px -10px 5px auto;
+}
+
+.buttons_event div {
+    width: 30px;
+    height: 25px;
+    justify-content: stretch;
+    /*border: 1px solid black;*/
+    font-weight: bolder;
+    font-size: large;
+    color: white;
+}
+
+.buttons_event div.cor_button {
+    background-color: cornflowerblue;
+    border-radius: 0px 0px 0px 10px;
+}
+
+.buttons_event div.cor_button:hover {
+    background-color: white;
+    color: cornflowerblue;
+    border: 2px solid cornflowerblue;
+    width: 26px;
+    height: 21px;
+}
+
+.buttons_event div.del_button {
+    background-color: palevioletred;
+    border-radius: 0px 10px 0px 0px;
+}
+
+.buttons_event div.del_button:hover {
+    background-color: darkred;
+}

@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}MyChat{% endblock title %}</title>
+    <link href="{% static "chats/base_style.css" %}" rel="stylesheet" type="text/css">
+    <link href="{% static "chats/user_info_style.css" %}" rel="stylesheet" type="text/css">
+    <link href="{% static "chats/chat_list_style.css" %}" rel="stylesheet" type="text/css">
+    <link href="{% static "chat_messages/messages_list_style.css" %}" rel="stylesheet" type="text/css">
+    <link href="{% static "chat_messages/message_style.css" %}" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<main id="main_section">
+
+    <section id="contacts_section">
+
+        {% block contacts_section_content %}
+            <p>
+                You haven't any chats:(<br>
+                Use upper form to find users.
+            </p>
+        {% endblock contacts_section_content %}
+    </section>
+
+    <section id="message_section">
+        {% block message_section_content %}
+            <h2>Choice your chat</h2>
+        {% endblock message_section_content %}
+    </section>
+
+</main>
+
+</body>
+
+</html>

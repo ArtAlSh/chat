@@ -1,0 +1,75 @@
+
+#user_info_section {
+    all: unset;
+    height: 60px;
+    /*border: 1px dotted yellowgreen;*/
+    background-color: aliceblue;
+    justify-content: center;
+}
+
+.user_info_card {
+    display: flex;
+    flex-direction: row;
+    margin: 5px auto;
+    /*border: 2px solid sienna;*/
+}
+
+.user_avatar {
+    width: 40px;
+    height: 40px;
+    margin: auto 5px;
+    border: 1px solid gray;
+    border-radius: 50%;
+}
+
+.users_contacts {
+    font-size: 30px;
+    margin: auto 2px;
+    padding: 0px;
+    color: gray;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin: 0px 5px auto auto;
+}
+
+.dropbtn {
+    background-color: cornflowerblue;
+    color: white;
+    padding: 5px;
+    font-size: 20px;
+    border: none;
+    border-radius: 5px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0px;
+    background-color: ghostwhite;
+    border: 2px solid cornflowerblue;
+    border-radius: 10px 0px 10px 10px;
+    min-width: 160px;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: cornflowerblue;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    display: none;
+}
