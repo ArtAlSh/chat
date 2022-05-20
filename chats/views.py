@@ -20,7 +20,7 @@ class HomePageRedirect(LoginRequiredMixin, RedirectView):
 
 class ChatsView(UserPassesTestMixin, ListView):
     model = ListOfChats
-    template_name = 'base_chats_list.html'
+    template_name = 'by_bootstrap/base_chats_list.html'
     context_object_name = 'chats_list'
     find_form = FindFormView()
 

@@ -1,0 +1,61 @@
+{% extends "by_bootstrap/base_chats_list.html" %}
+
+{% block message_section_content %}
+
+    <div style="height: 480px; overflow-y: auto;">
+
+        {# Empty message list #}
+        {% if not messages_list %}
+            <p>You haven't message.</p>
+        {% endif %}
+
+        <!--messages list-->
+        {% for message in messages_list %}
+            <div class="card text-dark my-2 bg-light {% if message.from_user == user %}border-primary ms-5{% else %}me-5{% endif %}">
+                <div class="card-header">
+                    <time>{{ message.date|date:"M j, G:i" }}</time>
+
+                    {# edit and delete buttons #}
+                    {% if message.from_user == user %}
+                        <div class="btn-group float-end">
+                            <button class="btn btn-sm bi-three-dots-vertical rounded"
+                                    type="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <a class="btn btn-sm btn-outline-info bi-pencil w-100"
+                                       href="{% url 'chats:update_message' user_id chat_id message.pk %}"
+                                    >edit</a>
+                                </li>
+                                <li>
+                                    <a class="btn btn-sm btn-outline-danger bi-x-lg w-100 mt-1"
+                                       href="{% url 'chats:delete_message' user_id chat_id message.pk %}"
+                                    >delete</a>
+                                </li>
+                            </ul>
+                        </div>
+                    {% endif %}
+
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{ message.text|linebreaksbr }}</p>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+
+    <!--new message form-->
+    <form class="input-group justify-content-center py-2"
+          style="height: 20%;"
+          method="post"
+          action="{{ message_form_url }}"
+    >
+        {% csrf_token %}
+        {{ message_form.text }}
+        <button class="btn btn-outline-primary rounded-circle mx-2 bi bi-send" type="submit"></button>
+    </form>
+
+{% endblock message_section_content %}

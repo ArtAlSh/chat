@@ -1,24 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>SignUp</title>
-</head>
-<body>
+{% extends "registration/base.html" %}
+{% load static %}
 
-<h1>SignUp Page</h1>
+{% block registration %}
 
-<form method="post">
-    {% csrf_token %}
-    <p>{{ form.username.label_tag }} {{ form.username }} {{ form.username.errors }}</p>
-    <p>{{ form.password1.label_tag }} {{ form.password1 }} {{ form.password1.errors }}</p>
-    <p>{{ form.password2.label_tag }} {{ form.password2 }} {{ form.password2.errors }}</p>
-    <button type="submit">SignUp</button>
-</form>
+<div class="container p-4 text-center">
 
-<p>
-    <a href="{% url 'accounts:login' %}">Sign in</a> if you have a account.
-</p>
+    <h1 class="text-center mt-2">SignUp</h1>
 
-</body>
-</html>
+    <form method="post">
+        {% csrf_token %}
+
+        {# _______user______ #}
+        <div class="row justify-content-center my-3">
+            <div class="col-sm-4 col-md-2">
+                <label for="id_username" class="form-label">Username: </label>
+            </div>
+            <div class="col-sm-8 col-md-5">
+                {{ form.username }} {{ form.username.errors }}
+            </div>
+        </div>
+
+        {# _______password 1______ #}
+        <div class="row justify-content-center my-3">
+            <div class="col-sm-4 col-md-2">
+                <label for="id_password1" class="form-label">Password: </label>
+            </div>
+            <div class="col-sm-8 col-md-5">
+                {{ form.password1 }} {{ form.password1.errors }}
+            </div>
+        </div>
+
+        {# _______password 2______ #}
+        <div class="row justify-content-center my-3">
+            <div class="col-sm-4 col-md-2">
+                <label for="id_password2" class="form-label">Password confirmation: </label>
+            </div>
+            <div class="col-sm-8 col-md-5">
+                {{ form.password2 }} {{ form.password2.errors }}
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary mb-3">SignUp</button>
+
+    </form>
+
+    <p><a href="{% url 'accounts:login' %}">Sign in</a> if you have a account.</p>
+
+</div>
+
+{% endblock registration %}

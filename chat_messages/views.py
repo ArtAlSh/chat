@@ -1,6 +1,7 @@
 # django's libs
 from django.urls import reverse
 from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 from django.views.generic.edit import BaseUpdateView, BaseCreateView, DeletionMixin, BaseDetailView
 from django.contrib.auth.mixins import UserPassesTestMixin
 # other app's libs
@@ -12,19 +13,21 @@ from .forms import MessageForm
 
 
 class MessageView(ChatsView):
-    template_name = 'message_list.html'
+    template_name = 'by_bootstrap/message_list.html'
     context_object_name = 'messages_list'
     ordering = ['date']
 
     def test_func(self):
         inherited_test = ChatsView.test_func(self)
+        if not inherited_test:
+            return False
         # check the user is chat owner
-        chat = Chat.objects.get(id=self.kwargs['chat_id'])
+        chat = get_object_or_404(Chat, id=self.kwargs['chat_id'])
         check_user_chat = self.request.user in chat.users_list()
-        return inherited_test and check_user_chat
+        return check_user_chat
 
     def get_queryset(self):
-        chat = Chat.objects.get(id=self.kwargs['chat_id'])
+        chat = get_object_or_404(Chat, id=self.kwargs['chat_id'])
         queryset = chat.message_set.all().order_by(*self.ordering)
         return queryset
 
@@ -112,10 +115,12 @@ class UpdateMessage(MessageView, BaseUpdateView):
 
     def test_func(self):
         inherit_test = super().test_func()
+        if not inherit_test:
+            return False
         # check user in messages
         message = self.get_object()
         check_user_message = self.request.user == message.from_user
-        return inherit_test and check_user_message
+        return check_user_message
 
 
 class DeleteMessage(UserPassesTestMixin, DeletionMixin, BaseDetailView):
@@ -125,11 +130,14 @@ class DeleteMessage(UserPassesTestMixin, DeletionMixin, BaseDetailView):
         return self.delete(request, *args, **kwargs)
 
     def test_func(self):
-        inherit_check = MessageView.test_func(self)
+        inherit_test = MessageView.test_func(self)
+        if not inherit_test:
+            return False
         # check user in message
-        message = self.model.objects.get(id=self.kwargs["pk"])
+        message = get_object_or_404(self.model, id=self.kwargs["pk"])
+        # message = self.model.objects.get(id=self.kwargs["pk"])
         check_user_message = self.request.user == message.from_user
-        return inherit_check and check_user_message
+        return check_user_message
 
     def get_success_url(self):
         return MessageView.get_success_url(self)

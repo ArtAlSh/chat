@@ -1,0 +1,106 @@
+{% extends "by_bootstrap/base.html" %}
+
+{% block contacts_section_content %}
+    <!--find-->
+    <form class="input-group my-2" method="post">
+        {% csrf_token %}
+        {{ find_form.find_field }}
+        <button class="btn btn-outline-primary bi bi-search" type="submit" name="find_button" value="find"></button>
+    </form>
+
+    {# __________own user's chats list_____________ #}
+    <div class="list-group" style="overflow-y: auto; height: 480px">
+
+        {# __for separate own users and new when find__ #}
+        {% if find_flag and chats_list %}
+            <p>Your chats:</p>
+        {% endif %}
+
+        {# __if haven't any chat__ #}
+        {% if not find_flag and not chats_list %}
+            <p>
+                You haven't chats.<br>
+                Use upper form to find and add new chat.
+            </p>
+        {% endif %}
+
+        {# ___user's chats___ #}
+        {% for chat in chats_list %}
+
+            <a href="{% url 'chats:message_view' user_id chat.chat.id %}"
+               class="list-group-item list-group-item-action {% if chat.chat.id == chat_id %}active{% endif %}">
+
+                <div class="row align-items-center">
+
+                    <div class="col-10">
+                        <img src="" alt="" class="float-start me-2 bi bi-person-square">
+                        <div class="card-text">{{ chat }}</div>
+                    </div>
+
+                    {# ______________edit and delete buttons_____________________ #}
+                    <div class="col-2">
+                        <div class="btn-group float-end">
+                            <button class="btn btn-sm bi-three-dots rounded"
+                                    type="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <form action="{% url 'chats:delete_chat' user_id chat.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button class="dropdown-item" type="submit">Delete</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+            </a>
+
+        {% endfor %}
+
+
+        {# _______New users list_________ #}
+        {% if find_flag %}
+
+            {% if not users_list %}
+                <p>Can't find any new user.</p>
+            {% endif %}
+
+            {% if users_list %}
+                <p>New chats:</p>
+            {% endif %}
+
+
+            {% for user in users_list %}
+                <a href="#" class="list-group-item list-group-item-action">
+
+                    <div class="row align-items-center">
+
+                        {# __User's info__ #}
+                        <div class="col-10">
+                            <img src="" alt="" class="float-start me-2 bi bi-person-square">
+                            <div class="card-text">{{ user.username }}</div>
+                        </div>
+
+                        {# __Add user form__ #}
+                        <form class="col-2" method="post" action="{% url 'chats:new_chat' user_id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="to_user" value="{{ user.id }}">
+                            <button class="btn btn-primary bi-person-plus" type="submit"></button>
+                        </form>
+
+                    </div>
+
+                </a>
+            {% endfor %}
+
+        {% endif %}
+
+
+    </div>
+
+{% endblock contacts_section_content %}

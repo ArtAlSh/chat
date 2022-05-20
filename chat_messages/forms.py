@@ -8,5 +8,10 @@ class MessageForm(forms.ModelForm):
         fields = ['text']
         labels = {'text': "Your message"}
         widgets = {
-            'text': forms.Textarea(attrs={"cols": "20", "rows": "1", "placeholder": "Message"})
+            'text': forms.Textarea(
+                attrs={
+                    "placeholder": "Message",
+                    "class": "form-control rounded-2",
+                    "style": "resize: none; height: 50px;",
+                })
         }
